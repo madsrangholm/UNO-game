@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Uno.DataTypes.Interfaces;
-using Uno.DataTypes.Enums;
+using Uno.Structures.Interfaces;
+using Uno.Structures.Enums;
 
 namespace Uno.Game.Deck
 {
@@ -25,12 +25,12 @@ namespace Uno.Game.Deck
             _value = value;
         }
 
-        public ECardValue GetValue
+        public ECardValue Value
         {
             get { return _value; }
         }
 
-        public ECardColor GetColor
+        public ECardColor Color
         {
             get
             {

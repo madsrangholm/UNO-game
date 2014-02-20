@@ -1,22 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Facilities.TypedFactory;
-using Uno.DataTypes.Interfaces;
+using Uno.Structures.Interfaces;
 using Uno.Game.Deck;
+using Castle.Windsor;
+using Uno.Structures.Factories;
 
 namespace Uno.IoC
 {
     public class IoC : IWindsorInstaller
     {
-        public void Install(Castle.Windsor.IWindsorContainer container, IConfigurationStore store)
+        public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            container
-                .Register(Component.For<ICard>().ImplementedBy<Card>().LifestyleTransient());
+            Contract.Assume(container != null);
+            container.AddFacility<TypedFactoryFacility>();
+            container.Register(Component.For<ICardFactory>().AsFactory());
+            container.Register(Component.For<ICard>().ImplementedBy<Card>().LifestyleTransient());
             //container.AddFacility<TypedFactoryFacility>();
             //container.Register(Component.For<IMyFirstFactory>().AsFactory());
             //container
